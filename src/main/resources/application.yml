@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: EaseSoul_Server
+  datasource:
+    url: jdbc:postgresql://localhost:5432/easesoul_BD
+    username: postgres
+    password: 20908503
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: localhost
+    port: 1025
+    username: farahr2001@gmail.com
+    password: hapw vjqz tyqr tfyo
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+
+application:
+  security:
+    jwt:
+      secret-key: xNc7Vleop58clEtY7DwnxKv7QG8ErD8Gq1ydx5cv6pA=
+      expiration: 3600000
+  mailing:
+    frontend:
+      activation-url: http://localhost:8080/activate
+
+server:
+  port: 8080
