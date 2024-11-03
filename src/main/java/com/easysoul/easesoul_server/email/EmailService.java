@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -55,5 +56,17 @@ public class EmailService {
         helper.setText(templateContent, true);
 
         mailSender.send(mimeMessage);
+    }
+    @Async
+    public void sendActivationEmail(String to, String token) {
+        String subject = "Account Activation";
+        String message = "Click the link to activate your account: http://localhost:8080/auth/activate?token=" + token;
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(to);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(message);
+
+        mailSender.send(mailMessage);
     }
 }
