@@ -1,25 +1,24 @@
 package com.easysoul.easesoul_server.service;
 
+//Imports
+
 import com.easysoul.easesoul_server.dto.RegisterRequestDto;
+import com.easysoul.easesoul_server.email.EmailService;
 import com.easysoul.easesoul_server.exceptions.EmailAlreadyExistsException;
 import com.easysoul.easesoul_server.model.ERole;
 import com.easysoul.easesoul_server.model.Role;
+import com.easysoul.easesoul_server.model.Token;
 import com.easysoul.easesoul_server.model.User;
 import com.easysoul.easesoul_server.repository.RoleRepository;
 import com.easysoul.easesoul_server.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.hibernate.Session;
-import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 
 @Service
 public class AuthService {
@@ -27,6 +26,12 @@ public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TokenService tokenService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -37,38 +42,10 @@ public class AuthService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private void logDatabaseDetails() {
-        try {
-            Session session = entityManager.unwrap(Session.class);
-            SessionFactoryImplementor sessionFactory = (SessionFactoryImplementor) session.getSessionFactory();
-            Connection connection = sessionFactory.getServiceRegistry()
-                    .getService(ConnectionProvider.class)
-                    .getConnection();
-
-            DatabaseMetaData metaData = connection.getMetaData();
-
-            // Log database details
-            logger.info("Database Product Name: {}", metaData.getDatabaseProductName());
-            logger.info("Database Name: {}", connection.getCatalog());
-            logger.info("Schema Name: {}", connection.getSchema());
-
-            // Get User entity metadata
-            String tableName = entityManager.getMetamodel()
-                    .entity(User.class)
-                    .getName();
-
-            logger.info("User Table Name: {}", tableName);
-
-            connection.close();
-        } catch (Exception e) {
-            logger.error("Error getting database details: ", e);
-        }
-    }
 
     // Register new user
     public User register(RegisterRequestDto registerRequest) throws Exception {
         // Log database details at the start of registration
-        logDatabaseDetails();
 
         logger.info("Starting registration for email: {}", registerRequest.getEmail());
 
@@ -114,5 +91,30 @@ public class AuthService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+    //Reset Password -> REQUEST
+    public void requestPasswordReset(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        Token token = tokenService.createPasswordResetToken(user);
+
+        // Send email with the reset token (assuming emailService has been configured)
+        String resetLink = "http://localhost:8080/auth/reset-password?token=" + token.getToken();
+        emailService.sendPasswordResetEmail(user.getEmail(), resetLink);
+    }
+
+    public void resetPassword(String token, String newPassword) {
+        tokenService.validateToken(token);
+
+        Token resetToken = tokenService.findByToken(token)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid reset token"));
+
+        User user = resetToken.getUser();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        // Delete the token after successful password reset
+        tokenService.deleteToken(token);
     }
 }

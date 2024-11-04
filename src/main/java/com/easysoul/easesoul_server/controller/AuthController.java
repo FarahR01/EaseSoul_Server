@@ -1,9 +1,6 @@
 package com.easysoul.easesoul_server.controller;
-import org.springframework.security.core.GrantedAuthority;  // Added this import
 
-import com.easysoul.easesoul_server.dto.JwtResponseDto;
-import com.easysoul.easesoul_server.dto.LoginRequestDto;
-import com.easysoul.easesoul_server.dto.RegisterRequestDto;
+import com.easysoul.easesoul_server.dto.*;
 import com.easysoul.easesoul_server.email.EmailService;
 import com.easysoul.easesoul_server.model.Token;
 import com.easysoul.easesoul_server.model.User;
@@ -16,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -114,6 +112,17 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequestDto forgotPasswordRequest) {
+        authService.requestPasswordReset(forgotPasswordRequest.getEmail());
+        return ResponseEntity.ok("Password reset link sent to your email.");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequestDto resetPasswordRequest) {
+        authService.resetPassword(resetPasswordRequest.getToken(), resetPasswordRequest.getNewPassword());
+        return ResponseEntity.ok("Password reset successfully.");
     }
 
 }
