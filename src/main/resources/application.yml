@@ -4,11 +4,11 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/easesoul_BD
     username: postgres
-    password: 20908503
+    password: Eya@12345
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -18,8 +18,10 @@ spring:
   mail:
     host: localhost
     port: 1025
-    username: farahr2001@gmail.com
-    password: hapw vjqz tyqr tfyo
+    username: eyabenhjaal@gmail.com
+    password: bnpq ryeb qqbl guny
+
+
     properties:
       mail:
         smtp:

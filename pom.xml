@@ -143,6 +143,12 @@
                         <artifactId>spring-restdocs-asciidoctor</artifactId>
                         <version>${spring-restdocs.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>com.amazonaws</groupId>
+                        <artifactId>aws-java-sdk-s3</artifactId>
+                        <version>1.12.118</version>
+                    </dependency>
+
                 </dependencies>
             </plugin>
             <plugin>
