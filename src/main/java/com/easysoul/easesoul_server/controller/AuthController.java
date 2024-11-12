@@ -42,12 +42,20 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequestDto registerRequest) {
         try {
+            // Additional validation for psychologists
+            if ("PSYCHOLOGIST".equals(registerRequest.getRole())) {
+                if (registerRequest.getLicenseNumber() == null || registerRequest.getLicenseNumber().isEmpty()) {
+                    return ResponseEntity.badRequest().body("License number is required for psychologists.");
+                }
+                if (registerRequest.getSpecialization() == null || registerRequest.getSpecialization().isEmpty()) {
+                    return ResponseEntity.badRequest().body("Specialization is required for psychologists.");
+                }
+            }
+
             User user = authService.register(registerRequest);
 
-            // Create activation token
+            // Create activation token and send activation email
             Token activationToken = tokenService.createToken(user);
-
-            // Send email with activation token
             emailService.sendActivationEmail(user.getEmail(), activationToken.getToken());
 
             return ResponseEntity.ok("User registered successfully. Check your email to activate your account.");
@@ -124,5 +132,17 @@ public class AuthController {
         authService.resetPassword(resetPasswordRequest.getToken(), resetPasswordRequest.getNewPassword());
         return ResponseEntity.ok("Password reset successfully.");
     }
+    //Logout Endpoint
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutUser() {
+        // Call the logout method from AuthService
+        String result = authService.logout();
 
+        // Return the result from the AuthService
+        if (result.equals("Logged out successfully.")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(500).body(result);
+        }
+    }
 }

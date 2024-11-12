@@ -16,5 +16,7 @@ public class RegisterRequestDto {
     private String address;
     private String phoneNumber;
     private String role;
-
+    // New fields for psychologists
+    private String licenseNumber;
+    private String specialization;
 }

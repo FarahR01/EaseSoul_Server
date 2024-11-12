@@ -1,9 +1,9 @@
 package com.easysoul.easesoul_server.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import com.easysoul.easesoul_server.model.Role;
 
 @Entity
 @Table(name = "users")
@@ -25,6 +25,9 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    // Fields specific to psychologists
+    private String licenseNumber;
+    private String specialization;
     private boolean isActive;
     private LocalDateTime createdAt;
 
@@ -109,7 +112,7 @@ public class User {
     }
 
     public boolean isActive() {
-        return isActive;
+        return false;
     }
 
     public void setActive(boolean active) {
@@ -122,5 +125,11 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+    }
+
+    public void setSpecialization(String specialization) {
     }
 }

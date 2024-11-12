@@ -16,6 +16,7 @@ import jakarta.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,8 +46,6 @@ public class AuthService {
 
     // Register new user
     public User register(RegisterRequestDto registerRequest) throws Exception {
-        // Log database details at the start of registration
-
         logger.info("Starting registration for email: {}", registerRequest.getEmail());
 
         // Check if email is already in use
@@ -68,25 +67,20 @@ public class AuthService {
         user.setPhoneNumber(registerRequest.getPhoneNumber());
         user.setActive(false);
 
-        // Assign role based on the request
+        // Assign role and set additional fields for psychologists
         Role role;
         if ("PSYCHOLOGIST".equals(registerRequest.getRole())) {
             role = roleRepository.findByName(ERole.PSYCHOLOGIST)
                     .orElseThrow(() -> new RuntimeException("Error: Role PSYCHOLOGIST not found."));
+            user.setLicenseNumber(registerRequest.getLicenseNumber());
+            user.setSpecialization(registerRequest.getSpecialization());
         } else {
             role = roleRepository.findByName(ERole.PATIENT)
                     .orElseThrow(() -> new RuntimeException("Error: Role PATIENT not found."));
         }
 
         user.setRole(role);
-        User savedUser = userRepository.save(user);
-
-        // Log successful registration
-        logger.info("Successfully registered user with email: {} in table: {}",
-                savedUser.getEmail(),
-                entityManager.getMetamodel().entity(User.class).getName());
-
-        return savedUser;
+        return userRepository.save(user);
     }
 
     public void saveUser(User user) {
@@ -116,5 +110,26 @@ public class AuthService {
 
         // Delete the token after successful password reset
         tokenService.deleteToken(token);
+    }
+
+    // Logout the user by clearing the security context (session invalidation can be added as needed)
+    public String logout() {
+        try {
+            // Log the logout attempt
+            logger.info("User is attempting to log out.");
+
+            // Clear the security context to invalidate the current session/user context
+            SecurityContextHolder.clearContext();  // Clears authentication context
+
+            // Log successful logout
+            logger.info("User has successfully logged out.");
+
+            // Return success message
+            return "Logged out successfully.";
+        } catch (Exception e) {
+            // Log the error if anything goes wrong
+            logger.error("Logout failed: {}", e.getMessage());
+            return "An error occurred while logging out.";
+        }
     }
 }
