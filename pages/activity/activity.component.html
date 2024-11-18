@@ -1,0 +1,78 @@
+<app-navbar [navLight]="true"></app-navbar>
+
+<section class="bg-half-170 d-table w-100" style="background: url('assets/images/bg/01.jpg') bottom;">
+    <div class="bg-overlay bg-gradient-overlay-2"></div>
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12">
+                <div class="title-heading text-center">
+                    <h5 class="heading fw-semibold sub-heading text-white title-dark">Activity</h5>
+                    <p class="text-white-50 para-desc mx-auto mb-0">Please check all digital activities</p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+
+        <div class="position-middle-bottom">
+            <nav aria-label="breadcrumb" class="d-block">
+                <ul class="breadcrumb breadcrumb-muted mb-0 p-0">
+                    <li class="breadcrumb-item"><a routerLink="/">easesoul</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Activity</li>
+                </ul>
+            </nav>
+        </div>
+    </div><!--end container-->
+</section><!--end section-->
+<div class="position-relative">            
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-7">
+                <div class="me-lg-4">
+                    <div class="row g-4">
+                        <div *ngFor="let item of activity" class="col-12">
+                            <div class="card activity activity-primary rounded-md shadow p-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="position-relative">
+                                        <img src=" assets/images/gif/psy4.png" class="avatar avatar-md-md rounded-md shadow-md" alt="">
+                                        <div class="position-absolute top-0 start-0 translate-middle px-1 rounded-lg shadow-md bg-white">
+                                            <i class={{item.icon}}></i>
+                                        </div>
+                                    </div>
+                                        
+                                    <span class="content ms-3">
+                                        <a href="#" (click)="$event.preventDefault()" class="text-dark title mb-0 h6 d-block">reunion with amir</a>
+                                        <small class="text-muted d-block mt-1">at  <a href="#" (click)="$event.preventDefault()" class="link fw-bold">17/11/2024</a></small>
+                                        
+                                        <small class="text-muted d-block mt-1">{{item.time}}</small>
+                                        <div class="p-4 rounded-md shadow mt-4">
+                                            <div class="tagcloud">
+                                                <a *ngFor="let item of filters" href="#" (click)="$event.preventDefault()" class="d-inline-flex align-items-center rounded-md text-capitalize"><i class="fs-6 me-1" [ngClass]="item.icon"></i> Regoindre</a>
+                                            </div></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end row-->
+
+                    <div class="row">
+                        <div class="col-12 text-center mt-4">
+                            <a href="#" (click)="$event.preventDefault()" class="btn btn-link primary text-dark">Load More <i class="uil uil-arrow-right"></i></a>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-5 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
+<app-footer></app-footer>

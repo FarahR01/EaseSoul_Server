@@ -1,0 +1,95 @@
+<app-navbar [navLight]="true"></app-navbar>
+
+<section class="bg-half-170 d-table w-100" style="background: url('assets/images/bg/01.jpg') bottom;">
+    <div class="bg-overlay bg-gradient-overlay-2"></div>
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12">
+                <div class="title-heading text-center">
+                    <h5 class="heading fw-semibold sub-heading text-white title-dark">Wallet Connect</h5>
+                    <p class="text-white-50 para-desc mx-auto mb-0">Please check all Wallets and connect with your wallet</p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+
+        <div class="position-middle-bottom">
+            <nav aria-label="breadcrumb" class="d-block">
+                <ul class="breadcrumb breadcrumb-muted mb-0 p-0">
+                    <li class="breadcrumb-item"><a routerLink="/">easesoul</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Wallet</li>
+                </ul>
+            </nav>
+        </div>
+    </div><!--end container-->
+</section><!--end section-->
+<div class="position-relative">            
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
+            <div *ngFor="let item of walletData" class="col">
+                <div class="card wallet wallet-primary rounded-md shadow">
+                    <div class="ribbon ribbon-right ribbon-primary overflow-hidden" *ngIf="item.tag === true"><span class="text-center d-block shadow small fw-bold">Popular</span></div>
+                    <div class="p-5 rounded-md" [ngClass]="item.bg"></div>
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-50 translate-middle">
+                            <img [src]="item.image" class="avatar avatar-md-md rounded-pill shadow-sm p-3 bg-light" alt="">
+                        </div>
+                        
+                        <div class="content text-center p-4">
+                            <h5 class="mt-4 pt-2 mb-0">{{item.name}}</h5>
+                            <p class="text-muted mt-3 mb-0">{{item.desc}}<a href="#" class="link fw-semibold" (click)="onModalClick($event)"> here <i class="uil uil-arrow-right"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
+
+<app-footer></app-footer>
+
+<div class="modal fade show" id="LoginForm" tabindex="-1" [ngClass]="modal === true ? 'd-block' : 'd-none ' " style="background: #00000096;">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content rounded shadow border-0">
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title"><img src="assets/images/ease.png" alt=""></h5>
+                <button type="button" class="btn-close d-flex align-items-center text-dark" (click)="onModalClick($event)"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="modal-body p-4">
+                <form>
+                    <div class="form-floating mb-2">
+                        <input type="email" class="form-control" id="LoginEmail" placeholder="name@example.com">
+                        <label for="LoginEmail">Email Address:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="LoginPassword" placeholder="Password">
+                        <label for="LoginPassword">Password:</label>
+                    </div>
+                
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-3">
+                            <div class="form-check align-items-center d-flex mb-0">
+                                <input class="form-check-input mt-0" type="checkbox" value="" id="RememberMe">
+                                <label class="form-check-label text-muted ms-2" for="RememberMe">Remember me</label>
+                            </div>
+                        </div>
+                        <small class="text-muted mb-0"><a routerLink="/reset-password" class="text-muted fw-semibold">Forgot password ?</a></small>
+                    </div>
+    
+                    <button class="btn btn-primary rounded-md w-100" type="submit">Sign in</button>
+
+                    <div class="col-12 text-center mt-4">
+                        <small><span class="text-muted me-2">Don't have an account ?</span> <a routerLink="/signup" class="text-dark fw-bold">Sign Up</a></small>
+                    </div><!--end col-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

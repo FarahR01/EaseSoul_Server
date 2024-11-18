@@ -1,0 +1,94 @@
+[
+    
+    {
+        "id":20,
+        "image":"assets/images/gif/psy3.png",
+        "creator1":"assets/images/client/10.jpg",
+        "creator2":"assets/images/client/11.jpg", 
+        "creator3": "assets/images/client/08.jpg",
+
+        "creatorName":"Maria de Jesus Gutierrez Tellez",
+        "name":"Maria de Jesus Gutierrez Tellez",
+        "tag":"GIFs"
+    },
+    
+    
+    
+    {
+        "id":9,
+        "image":"assets/images/gif/psy1.png",
+        "gif":false,
+        "creator1":"assets/images/client/10.jpg",
+        "creator2":"assets/images/client/11.jpg", 
+        "creator3": "assets/images/client/08.jpg",
+
+        "name":"Valkyrie Abstract Art"
+    },
+    {
+        "id":10,
+        "image":"assets/images/gif/psy5.png",
+        "gif":true,
+        "creator1":"assets/images/client/03.jpg",
+        "creator2":"assets/images/client/04.jpg", 
+        "creator3": "assets/images/client/05.jpg",
+        "name":"Amirr",
+        "category":"art"
+    },
+    {
+        "id":11,
+        "image":"assets/images/gif/psy2.png",
+        "gif":false,
+        "creator1":"assets/images/client/06.jpg",
+        "creator2":"assets/images/client/07.jpg", 
+        "creator3": "assets/images/client/08.jpg",
+        "name":"Dodo hide the seek",
+       
+        "category":"games"
+    },
+    {
+        "id":12,
+        "image":"assets/images/gif/psy4.png",
+        "creator1":"assets/images/client/10.jpg",
+        "creator2":"assets/images/client/11.jpg", 
+        "creator3": "assets/images/client/08.jpg",
+        "name":"Oscar Villicaña García",
+      
+        "category":""
+    },
+    {
+        "id":13,
+        "image":"assets/images/gif/psy3.png",
+        "gif":false,
+        "creator1":"assets/images/client/13.jpg",
+        "creator2":"assets/images/client/01.jpg", 
+        "creator3": "assets/images/client/02.jpg",
+        "name":"Víctor Fernando Pérez López",
+       
+        "category":"video"
+    },
+    {
+        "id":14,
+        "image":"assets/images/gif/psy2.png",
+        "gif":false,
+        "creator1":"assets/images/client/03.jpg",
+        "creator2":"assets/images/client/04.jpg", 
+        "creator3": "assets/images/client/05.jpg",
+        "name":"Running Puppets",
+      
+        "category":"memes"
+    },
+    {
+        "id":8,
+        "image":"assets/images/gif/psy1.png",
+        "creator1":"assets/images/client/03.jpg",
+        "creator2":"assets/images/client/04.jpg", 
+        "creator3": "assets/images/client/05.jpg",
+        "name":"Maria de Jesus Gutierrez Tellez",
+        "amount":"",
+        "time":"",
+        "showtime":true,
+        "category":"music"
+    }
+    
+    
+]

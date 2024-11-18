@@ -1,0 +1,70 @@
+<app-navbar [navLight]="true"></app-navbar>
+<section class="bg-half-260 d-flex align-items-center bg-dark" style="background-image: url('assets/images/bg/bg02.png'); background-position: top center;">
+    <div class="container z-index-1">
+        <div class="background-lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="title-heading text-center">
+                    <h4 class="heading text-white mb-4 title-dark fw-bold">The Biggest <br> Collections of NFTs</h4>
+                    <p class="text-white title-dark mb-0 para-desc mx-auto">We are a huge marketplace dedicated to connecting great artists of all Superex with their fans and unique token collectors!</p>
+                
+                    <div class="mt-4 pt-2">
+                        <a routerLink="/aboutus" class="btn btn-primary rounded-md">Discover Now</a>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
+
+<section class="section">
+    <div class="container">
+        <app-services></app-services>
+    </div><!--end container-->
+    
+    <div class="container mt-100 mt-60">
+        <app-creator-three></app-creator-three>
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+        <app-product-three></app-product-three>
+    </div><!--end container-->
+    
+    <div class="container mt-100 mt-60">
+        <div class="row">
+            <div class="col">
+                <div class="section-two rounded-md shadow bg-gradient-primary px-md-5 px-4">
+                    <div class="row align-items-end">
+                        <div class="col-md-8">
+                            <div class="section-title text-md-start text-center">
+                                <h6 class="text-white-50 mb-1">Join with Superex Community</h6>
+                                <h4 class="title text-white title-dark mb-4">Become a Creator!</h4>
+
+                                <p class="text-white-50 para-desc mb-0">We are a huge marketplace dedicated to connecting great artists of all Superex with their fans and unique token collectors!</p>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-md-4 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                            <div class="text-md-end text-center">
+                                <a routerLink="/become-creator" class="btn btn-primary rounded-md">Click here <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+        <app-live-auction></app-live-auction>
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+        <app-blogs></app-blogs>
+    </div><!--end container-->
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,40 @@
+<form action="#">
+    <div class="registration-form text-dark text-start">
+        <div class="row g-lg-0">
+            <div class="col-lg-3 col-md-6">
+                <div class="filter-search-form position-relative filter-border">
+                    <i class="uil uil-search icons"></i>
+                    <input name="name" type="text" id="search-keyword" class="form-control filter-input-box bg-light border-0" placeholder="Search your keaywords">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-6 mt-3 mt-md-0">
+                <div class="filter-search-form position-relative filter-border">
+                    <i class="uil uil-usd-circle icons"></i>
+                    
+                    <ng-select class="form-select bg-light" [items]="value1" bindLabel="name" bindValue="id" placeholder="House">
+                    </ng-select>
+                </div>
+            </div><!--end col-->
+            
+            <div class="col-lg-3 col-md-6 mt-3 mt-lg-0">
+                <div class="filter-search-form position-relative filter-border">
+                    <i class="uil uil-window icons"></i>
+                    <ng-select class="form-select bg-light" [items]="value2" bindLabel="name" bindValue="id" placeholder="House">
+                    </ng-select>
+                    <!-- <select class="form-select bg-light">
+                        <option selected="" value="1">Art</option>
+                        <option value="2">Games</option>
+                        <option value="3">Music</option>
+                        <option value="4">Videos</option>
+                        <option value="5">Memes</option>
+                    </select> -->
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-6 mt-3 mt-lg-0">
+                <input type="submit" id="search" name="search" style="height: 60px;" class="btn btn-primary rounded-md searchbtn submit-btn w-100" value="Search">
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</form>

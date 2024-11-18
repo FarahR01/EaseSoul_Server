@@ -1,0 +1,56 @@
+<div class="row align-items-end mb-5 pb-3">
+    <div class="col-lg-4">
+        <div class="section-title mb-4 mb-lg-0">
+            <h4 class="title mb-2">Newest Items</h4>
+            <p class="text-muted mb-0">Best sellers of the week's NFTs</p>
+        </div>
+    </div><!--end slide-->
+
+    <div class="col-lg-8 filters-group-wrap">
+        <div class="filters-group">
+            <ul class="container-filter mb-0 categories-filter text-lg-end list-unstyled filter-options">
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === null ? 'active' : '' " (click)="matchCategory(null)"><i class="uil uil-browser"></i> All</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'games' ? 'active' : '' " (click)="matchCategory('games')"><i class="uil uil-volleyball"></i> Games</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'art' ? 'active' : '' " (click)="matchCategory('art')"><i class="uil uil-chart-pie-alt"></i> Art</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'music' ? 'active' : '' " (click)="matchCategory('music')"><i class="uil uil-music"></i> Music</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'video' ? 'active' : '' " (click)="matchCategory('video')"><i class="uil uil-camera-plus"></i> Video</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'memes' ? 'active' : '' " (click)="matchCategory('memes')"><i class="uil uil-rocket"></i> Memes</li>
+            </ul>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4" id="grid">
+    <div *ngFor="let item of filteredData | slice : 0 : 8" class="col picture-item">
+        <div class="card bg-white nft-items nft-primary rounded-md shadow overflow-hidden mb-1">
+            <div class="nft-image position-relative overflow-hidden">
+                <a [routerLink]="['/item-detail-one', item.id]"><img [src]="item.image" class="img-fluid" alt=""></a>
+                <div class="position-absolute top-0 start-0 m-3">
+                    <a href="#" (click)="$event.preventDefault()" class="badge badge-link bg-primary">{{item.tag}}</a>
+                </div>
+                <div class="position-absolute top-0 end-0 m-3">
+                    <span class="like-icon shadow-sm"><a href="#" (click)="$event.preventDefault()" class="text-muted icon"><i class="mdi mdi-18px mdi-heart mb-0"></i></a></span>
+                </div>                                
+            </div>
+
+            <div class="card-body content position-relative">
+                <a [routerLink]="['/item-detail-one', item.id]" class="title text-dark h6">{{item.name}}</a>
+
+                <div class="d-flex align-items-center justify-content-between mt-3">
+                    <div class="">
+                        <small class="rate fw-bold">{{item.amount}}</small>
+                    </div>
+                    <a [routerLink]="['/item-detail-one', item.id]" class="btn btn-icon btn-pills btn-primary"><i class="uil uil-shopping-bag"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col mt-4">
+        <div class="text-center">
+            <a routerLink="/explore-two" class="btn btn-primary rounded-md">View More <i class="uil uil-arrow-right"></i></a>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->

@@ -1,0 +1,208 @@
+<app-navbar></app-navbar>
+
+<section class="bg-creator-profile">
+    <div class="container">
+        <div class="profile-banner">
+            <input id="pro-banner" name="profile-banner" type="file" class="d-none" (change)="loadFile($event)" />
+            <div class="position-relative d-inline-block">
+                <img src="assets/images/blog/single.jpg" class="rounded-md shadow-sm img-fluid" id="profile-banner" alt="">
+                <label class="icons position-absolute bottom-0 end-0" for="pro-banner"><span class="btn btn-icon btn-sm btn-pills btn-primary"><i data-feather="camera" class="icons"></i></span></label>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="text-center mt-n80">
+                    <div class="profile-pic">
+                        <input id="pro-img" name="profile-image" type="file" class="d-none" (change)="loadFile($event)" />
+                        <div class="position-relative d-inline-block">
+                            <img src="assets/images/client/01.jpg" class="avatar avatar-medium img-thumbnail rounded-pill shadow-sm" id="profile-image" alt="">
+                            <label class="icons position-absolute bottom-0 end-0" for="pro-img"><span class="btn btn-icon btn-sm btn-pills btn-primary"><i data-feather="camera" class="icons"></i></span></label>
+                        </div>
+                    </div>
+
+                    <div class="content mt-3">
+                        <h5 class="mb-3">streetboyyy</h5>
+                        <small class="text-muted px-2 py-1 rounded-lg shadow">bhcedeh5sdijuj-husac4saiu <a href="javascript:void(0)" class="text-primary h5 ms-1"><i class="uil uil-copy"></i></a></small>
+
+                        <h6 class="mt-3 mb-0">Artist, UX / UI designer, and Entrepreneur</h6>
+
+                        <div class="mt-4">
+                            <a routerLink="/creator-profile-edit" class="btn btn-pills btn-outline-primary mx-1">Edit Profile</a>
+                            <a routerLink="/upload-work" class="btn btn-pills btn-icon btn-outline-primary mx-1"><i class="uil uil-folder-upload"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mt-100 mt-60">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs border-bottom" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" [ngClass]="activeTab === 1 ? 'active' : '' " (click)="onTabClick(1)">Created</button>
+                    </li>
+                    
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" [ngClass]="activeTab === 2 ? 'active' : '' " (click)="onTabClick(2)">Liked</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" [ngClass]="activeTab === 3 ? 'active' : '' " (click)="onTabClick(3)">On Sale</button>
+                    </li>
+
+                 
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" [ngClass]="activeTab === 5 ? 'active' : '' " (click)="onTabClick(5)">Activites</button>
+                    </li>
+
+                  
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" [ngClass]="activeTab === 7 ? 'active' : '' " (click)="onTabClick(7)">About</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-4 pt-2">
+                    <div class="tab-pane fade" [ngClass]="activeTab === 1 ? 'show active' : '' ">
+                        <app-product-one [filter]="false"></app-product-one>
+                    </div>
+
+                    <div class="tab-pane fade" [ngClass]="activeTab === 2 ? 'show active' : '' ">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-8 text-center">
+                                <img src="assets/images/svg/office-desk.svg" class="img-fluid" alt="">
+
+                                <div class="content">
+                                    <h5 class="mb-4">No Items</h5>
+                                    <p class="text-muted">Show your appreciation for other's work by liking the shots you love. We'll collect all of your likes here for you to revisit anytime.</p>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+
+                    <div class="tab-pane fade" [ngClass]="activeTab === 3 ? 'show active' : '' ">
+                        <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
+                            <div *ngFor="let item of nftData | slice : 0 : 3" class="col">
+                                <div class="card nft-items nft-primary nft-auction rounded-md shadow overflow-hidden mb-1 p-3">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img [src]="item.creator1" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                                            <a href="#" (click)="$event.preventDefault()" class="text-dark small creator-name h6 mb-0 ms-2">{{item.creatorName}}</a>
+                                        </div>
+                                    </div>
+        
+                                    <div class="nft-image rounded-md mt-3 position-relative overflow-hidden">
+                                        <a [routerLink]="['/item-detail-one', item.id]"><img [src]="item.image" class="img-fluid" alt=""></a>
+                                        <div class="position-absolute top-0 start-0 m-2">
+                                            <a href="#" (click)="$event.preventDefault()" class="badge badge-link bg-primary">{{item.tag}}</a>
+                                        </div>
+                                        <div class="position-absolute top-0 end-0 m-2">
+                                            <span class="like-icon shadow-sm"><a href="#" (click)="$event.preventDefault()" class="text-muted icon"><i class="mdi mdi-18px mdi-heart mb-0"></i></a></span>
+                                        </div>                                
+                                    </div>
+        
+                                    <div class="card-body content position-relative p-0 mt-3">
+                                        <a [routerLink]="['/item-detail-one', item.id]" class="title text-dark h6">{{item.name}}</a>
+        
+                                        <div class="d-flex align-items-center justify-content-between mt-3">
+                                            <div class="">
+                                                <small class="mb-0 d-block fw-semibold">Current Bid:</small>
+                                                <small class="rate fw-bold">{{item.amount}}</small>
+                                            </div>
+                                            <a [routerLink]="['/item-detail-one', item.id]" class="btn btn-icon btn-pills btn-primary"><i class="uil uil-shopping-bag"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div>
+
+                    <div class="tab-pane fade" [ngClass]="activeTab === 4 ? 'show active' : '' ">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-8 text-center">
+                                <img src="assets/images/svg/products-to-cart-or-basket.svg" class="img-fluid" alt="">
+
+                                <div class="content mt-4">
+                                    <h5 class="mb-4">No Collection</h5>
+                                    <p class="text-muted">Save interesting shots into personalized collections, and discover new and interesting recommendations along the way.</p>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+
+                    <div class="tab-pane fade" [ngClass]="activeTab === 5 ? 'show active' : '' ">
+                        <div class="row g-4">
+                            <div *ngFor="let item of activity" class="col-12">
+                                <div class="card activity activity-primary rounded-md shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="position-relative">
+                                            <img src="assets/images/gif/psy4.png" class="avatar avatar-md-md rounded-md shadow-md" alt="">
+
+                                            <div class="position-absolute top-0 start-0 translate-middle px-1 rounded-lg shadow-md bg-white">
+                                                <i class={{item.icon}}></i>
+                                            </div>
+                                        </div>
+                                            
+                                        <span class="content ms-3">
+                                            <a href="#" (click)="$event.preventDefault()" class="text-dark title mb-0 h6 d-block">{{item.title}}</a>
+                                            <small class="text-muted d-block mt-1">amir <a href="#" (click)="$event.preventDefault()" class="link fw-bold">ben yussef</a></small>
+                                            
+                                            <small class="text-muted d-block mt-1">{{item.time}}</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+
+                        <div class="row">
+                            <div class="col-12 text-center mt-4">
+                                <a href="#" (click)="$event.preventDefault()" class="btn btn-link primary text-dark">Load More <i class="uil uil-arrow-right"></i></a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+
+                    <div class="tab-pane fade" [ngClass]="activeTab === 6 ? 'show active' : '' ">
+                        <h5 class="mb-4">6 Followers</h5>
+                        <div class="row g-4">
+                            <div *ngFor="let item of followers" class="col-md-6">
+                                <div class="p-4 rounded-md shadow users user-primary">
+                                    <div class="d-flex align-items-center">
+                                        <div class="position-relative">
+                                            <img [src]="item.image" class="avatar avatar-md-md rounded-pill shadow-sm img-thumbnail" alt="">
+                                            <div class="position-absolute bottom-0 end-0">
+                                                <a href="#" (click)="$event.preventDefault()" class="btn btn-icon btn-pills btn-sm btn-primary"><i class="uil uil-plus"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="content ms-3">
+                                            <h6 class="mb-0"><a routerLink="/creator-profile" class="text-dark name">{{item.name}}</a></h6>
+                                            <small class="text-muted d-flex align-items-center"><i class="uil uil-map-marker fs-5 me-1"></i>{{item.location}}</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="border-top my-4"></div>
+                                    <div class="row row-cols-xl-6 g-3">
+                                        <div *ngFor="let el of item.subImage" class="col">
+                                            <a routerLink="/item-detail-one" class="user-item"><img [src]="el" class="img-fluid rounded-md shadow-sm" alt=""></a>
+                                        </div>
+                                    </div><!--end row-->
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div>
+
+                    <div class="tab-pane fade" [ngClass]="activeTab === 7 ? 'show active' : '' ">
+                        <h5 class="mb-4">Calvin Carlo</h5>
+
+                        <p class="text-muted mb-0">I have started my career as a trainee and prove my self and achieve all the milestone with good guidance and reach up to the project manager. In this journey, I understand all the procedure which make me a good developer, team leader, and a project manager.</p>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
+<app-footer></app-footer>

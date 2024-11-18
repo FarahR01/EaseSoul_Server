@@ -1,0 +1,97 @@
+<app-navbar></app-navbar>
+<section class="bg-half-100 d-table w-100 pb-0">
+    <div class="container position-relative" style="z-index: 1;">
+        <div class="bg-half-100 rounded-md shadow-sm position-relative overflow-hidden">
+            <div class="bg-video-wrapper">
+                <iframe src="https://player.vimeo.com/video/502163294?background=1&autoplay=1&loop=1&byline=0&title=0"></iframe>
+              
+            </div>
+            <div class="bg-overlay bg-linear-gradient-2"></div>
+            <div class="row justify-content-center my-5">
+                <div class="col-12">
+                    <div class="title-heading text-center px-4">
+                        <h4 class="display-6 text-white title-dark fw-medium mb-3">The way to Find <br> any <span class="text-gradient-primary">Digital</span> Content</h4>
+                        <p class="text-white title-dark mb-0">Discover limited-edition digital arts. Create, Sell and Buy now.</p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+    </div><!--end container-->
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="features-absolute">
+                    <div class="row justify-content-center" id="reserve-form">
+                        <div class="col-xl-10 mt-lg-5">
+                            <div class="card bg-white feature-top border-0 shadow rounded p-3">
+                                <app-select-form></app-select-form>
+                            </div>
+                        </div><!--ed col-->
+                    </div><!--end row-->
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <div class="container mt-4 pt-2 mt-lg-0 pt-lg-0">
+        <app-product-one [filter]="false"></app-product-one>
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+        <app-creator-one></app-creator-one>
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="section-title text-center mb-4 pb-2">
+                    <h4 class="title mb-2">Popular Collection</h4>
+                    <p class="text-muted mb-0">Best Collection of the week's NFTs</p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+
+        <div class="row">
+            <div *ngFor="let item of collectionData | slice : 0 : 3" class="col-lg-4 col-md-6 mt-4 pt-2">
+                <div class="card bg-white collections collection-primary rounded-md shadow p-2 pb-0">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <img [src]="item.image1" class="img-fluid shadow-sm rounded-md" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-4">
+                            <img [src]="item.image2" class="img-fluid shadow-sm rounded-md" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-4">
+                            <img [src]="item.image3" class="img-fluid shadow-sm rounded-md" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-4">
+                            <img [src]="item.image4" class="img-fluid shadow-sm rounded-md" alt="">
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    <div class="content text-center p-4 mt-n5">
+                        <div class="position-relative d-inline-flex">
+                            <img [src]="item.clientImg" class="avatar avatar-small rounded-pill img-thumbnail shadow-md" alt="">
+                            <span class="verified text-primary">
+                                <i class="mdi mdi-check-decagram"></i>
+                            </span>
+                        </div>
+
+                        <div class="mt-2">
+                            <a routerLink="/explore-four" class="text-dark title h5">{{item.name}}</a>
+                        
+                            <p class="text-muted mb-0 small">27 Items</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
+<app-footer></app-footer>

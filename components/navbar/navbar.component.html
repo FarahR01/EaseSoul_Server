@@ -1,0 +1,178 @@
+<header id="topnav" class="defaultscroll sticky"  [ngClass]="scrolled ? 'nav-sticky' :'' || bgGradiant === true ? 'gradient' : ''  " >
+    <div class="container">
+        <!-- Logo Start-->
+        <ng-container *ngIf="navLight; else elseTemplate">
+            <a class="logo" routerLink="/">
+              
+                <img src="assets/images/ease.png" height="26" class="ease-mode" alt="">
+            </a>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <a class="logo" routerLink="/">
+                <img src="assets/images/ease.png" height="26" class="ease-mode" alt="">
+            </a>
+        </ng-template>
+        <!-- Logo end-->
+
+        <!-- Mobile -->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle" [ngClass]="showToggleMenu ? 'open' : '' " id="isToggle" (click)="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+              
+                
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+        <!-- Mobile -->
+
+        <!--Login button Start-->
+        <ul class="buy-button list-inline mb-0">
+            <li class="list-inline-item mb-0 me-1">
+                <ng-container *ngIf="navLight; else elseTemplate2">
+                    <div class="dropdown" (clickOutside)="outsideSearch($event)">
+                        <button type="button" class="btn dropdown-toggle p-0" (click)="setSearchDropdown()" >
+                            <i class="uil uil-search text-white title-dark btn-icon-light fs-5 align-middle"></i>
+                            <i class="uil uil-search text-dark btn-icon-dark fs-5 align-middle"></i>
+                        </button>
+                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 p-0" style="width: 300px; right:100%;" [ngClass]="setSearch ? 'd-block' : 'd-none' ">
+                            <div class="search-bar">
+                                <div id="itemSearch" class="menu-search mb-0">
+                                    <form role="search" method="get" id="searchItemform" class="searchform">
+                                        <input type="text" class="form-control border rounded shadow" name="s" id="s" placeholder="Search...">
+                                        <input type="submit" id="searchItemsubmit" value="Search">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #elseTemplate2>
+                    <div class="dropdown" (clickOutside)="outsideSearch($event)">
+                        <button type="button" class="btn dropdown-toggle p-0" (click)="setSearchDropdown()">
+                            <i class="uil uil-search text-dark fs-5 align-middle"></i>
+                        </button>
+                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 p-0" style="width: 300px; right:100%;" [ngClass]="setSearch ? 'd-block' : 'd-none' ">
+                            <div class="search-bar">
+                                <div id="itemSearch" class="menu-search mb-0">
+                                    <form role="search" method="get" id="searchItemform" class="searchform">
+                                        <input type="text" class="form-control border rounded" name="s" id="searchItem" placeholder="Search...">
+                                        <input type="submit" id="searchItemsubmit" value="Search">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                
+            </li>
+            <ng-container *ngIf="navLight; else elseTemplate3">
+                <li class="list-inline-item mb-0 me-1">
+                    <a id="connectWallet" (click)="requestAccounts()">
+                        <span class="btn-icon-dark"><span class="btn btn-icon btn-pills btn-primary"><i class="uil uil-wallet fs-6"></i></span></span>
+                        <span class="btn-icon-light"><span class="btn btn-icon btn-pills btn-light"><i class="uil uil-wallet fs-6"></i></span></span>
+                    </a>
+                </li>
+            </ng-container>
+            <ng-template #elseTemplate3>
+                <li class="list-inline-item mb-0 me-1">
+                    <a id="connectWallet" (click)="requestAccounts()" class="btn btn-icon btn-pills btn-primary"><i class="uil uil-wallet fs-6"></i></a>
+                </li>
+            </ng-template>
+            
+            <li class="list-inline-item mb-0">
+                <div class="dropdown dropdown-primary" (clickOutside)="outsideUser($event)">
+                    <button type="button" class="btn btn-pills dropdown-toggle p-0" (click)="setUserDropdown()"><img src="assets/images/client/01.jpg" class="rounded-pill avatar avatar-sm-sm" alt=""></button>
+                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 pb-3 pt-0 overflow-hidden rounded" style="min-width: 200px;" [ngClass]="setUser ? 'd-block' : 'd-none' ">
+                        <div class="position-relative">
+                            <div class="pt-5 pb-3 bg-gradient-primary"></div>
+                            <div class="px-3">
+                                <div class="d-flex align-items-end mt-n4">
+                                    <img src="assets/images/client/01.jpg" class="rounded-pill avatar avatar-md-sm img-thumbnail shadow-md" alt="">
+                                    <h6 class="text-dark fw-bold mb-0 ms-1">Calvin Carlo</h6>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="" class="text-primary"><span class="uil uil-copy"></span></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <a class="dropdown-item small fw-semibold text-dark d-flex align-items-center" routerLink="/creator-profile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-user align-middle h6 mb-0 me-1"></i></span> Profile</a>
+                            <a class="dropdown-item small fw-semibold text-dark d-flex align-items-center" routerLink="/creator-profile-edit"><span class="mb-0 d-inline-block me-1"><i class="uil uil-cog align-middle h6 mb-0 me-1"></i></span> Settings</a>
+                            <a class="dropdown-item small fw-semibold text-dark d-flex align-items-center" routerLink="/reset-password"><span class="mb-0 d-inline-block me-1"><i class="uil uil-cog align-middle h6 mb-0 me-1"></i></span> Forgot Password</a>
+
+                            <a class="dropdown-item small fw-semibold text-dark d-flex align-items-center" routerLink="/lock-screen"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6 mb-0 me-1"></i></span> Lock Screen</a>
+
+                            <div class="dropdown-divider border-top"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!--Login button End-->
+
+        <div id="navigation" [ngClass]="showToggleMenu ? 'd-block' : 'd-none' ">
+            <!-- Navigation Menu-->   
+            <ul class="navigation-menu nav-left" [ngClass]="navLight ? 'nav-light' : '' ">
+                
+                <li class="ms-0"><a routerLink="/index-five" class="sub-menu-item"> Psychologue</a></li>
+                <li class="ms-0"><a routerLink="/explore-two" class="sub-menu-item"> Blog</a></li>
+
+                <li class="has-submenu parent-parent-menu-item" [ngClass]="['/explore-one','/explore-two', '/explore-three', '/explore-four', '/auction','/item-detail-one', '/item-detail-two','/explore-item'].includes(currentUrl) ? 'active' : '' ">
+                    
+                </li>
+                
+                <li [ngClass]="currentUrl === '/activity' ? 'active' : '' "><a routerLink="/activity" class="sub-menu-item"> Activity</a></li>
+
+                <li [ngClass]="currentUrl === '/signup' ? 'active' : '' "><a routerLink="/signup" class="sub-menu-item"> Signup</a></li>
+                               <li class="ms-0"><a routerLink="/login" class="sub-menu-item"> Login</a></li>
+                               <li [ngClass]="currentUrl === '/aboutus' ? 'active' : '' "><a routerLink="/aboutus" class="sub-menu-item"> About Us</a></li>
+
+                <li class="has-submenu parent-parent-menu-item" [ngClass]="['/page-item','/aboutus','/creator-item','/creators','/creator-profile','/creator-profile-edit','/become-creator','/collections','/blog-item','/blogs','/blog-sidebar','/blog-detail','/auth-item','/login','/signup','/reset-password','/lock-screen','/special-item','/comingsoon','/maintenance','/error','/help-item','/helpcenter-overview','/helpcenter-faqs','/helpcenter-guides','/helpcenter-support-request','/upload-work','/terms','/privacy'].includes(currentUrl) ? 'active' : '' ">
+                    <ul class="submenu" [ngClass]="['/page-item','/aboutus','/creator-item','/creators','/creator-profile','/creator-profile-edit','/become-creator','/collections','/blog-item','/blogs','/blog-sidebar','/blog-detail','/auth-item','/login','/signup','/reset-password','/lock-screen','/special-item','/comingsoon','/maintenance','/error','/help-item','/helpcenter-overview','/helpcenter-faqs','/helpcenter-guides','/helpcenter-support-request','/upload-work','/terms','/privacy'].includes(subManu) ? 'open' : '' ">
+                      
+                        
+                           
+                       
+                        </ul>
+                </li>
+                
+                <li [ngClass]="currentUrl === '/contact' ? 'active' : ' ' "><a routerLink="/contact" class="sub-menu-item">Contact</a></li>
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</header>
+
+<div *ngIf="metaModal" class="modal fade show d-block" style="background: #00000096">
+    <div class="modal-dialog modal-dialog-centered modal-sm">                    
+        <div class="modal-content justify-content-center border-0 shadow-md rounded-md position-relative">
+            <div class="position-absolute top-0 start-100 translate-middle z-index-1">
+                <button type="button" (click)="closeMeta()" class="btn btn-icon btn-pills btn-sm btn-light btn-close opacity-10" data-bs-dismiss="modal" id="close-modal"><i class="uil uil-times fs-4"></i></button>
+            </div>
+
+            <div class="modal-body p-4 text-center">
+                <img src="assets/images/wallet/metamask-fox.png" class="avatar avatar-md-md rounded-circle shadow-sm " alt="">
+
+                <div class="content mt-4">
+                    <h5 class="text-danger mb-4">Error!</h5>
+
+                    <p class="text-muted">Please Download MetaMask and create your profile and wallet in MetaMask. Please click and check the details,</p>
+
+                    <a href="https://metamask.io/" class="btn btn-link primary text-primary fw-bold" target="_blank">MetaMask</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

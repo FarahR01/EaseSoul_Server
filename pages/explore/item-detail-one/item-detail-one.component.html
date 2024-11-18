@@ -1,0 +1,222 @@
+<app-navbar></app-navbar>
+
+<section class="bg-item-detail d-table w-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="sticky-bar">
+                    <img [src]="data?.image ? data.image : 'assets/images/items/item-detail-1.jpg'" class="img-fluid rounded-md shadow" alt="">
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                <div class="ms-lg-5">
+                    <div class="title-heading">
+                        <h4 class="h3 fw-bold mb-0">Oscar 
+                            <span class="text-gradient-primary">Villicaña </span> <br> <span class="text-gradient-primary">García</span> </h4> <br>Psychologue
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mt-4 pt-2">
+                            <h6></h6>
+                            <h4 class="mb-0"></h4>
+                            <small class="mb-0 text-muted"></small>
+                        </div>
+
+                        
+
+                        <div class="col-12 mt-4 pt-2">
+                            <a href="/item-detail-two" class="btn btn-l btn-pills btn-primary me-2" ><i class="mdi mdi-gavel fs-5 me-2"></i> Reserver-Moi</a>
+
+                            <a href="#" class="btn btn-l btn-pills btn-primary" (click)="bidModal2($event)"><i class="mdi mdi-cart fs-5 me-2"></i> Buy Now</a>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 pt-2">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs border-bottom" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" [ngClass]="activeTab === 1 ? 'active' : '' " (click)="onTabClick(1)">Details</button>
+                                </li>
+                                
+                                
+    
+                                
+                            </ul>
+    
+                            <div class="tab-content pt-2">
+                                <div class="tab-pane fade mt-4" [ngClass]="activeTab === 1 ? 'show active' : '' ">
+                                    <p class="text-muted">Oscar Villicaña est le directeur général du Centro de Atención Psicológica y Aprendizaje Mák Psap, où il traite les enfants dès l’âge de 2 ans, les adolescents et les adultes, en ligne et en personne.
+
+                                        Diplômée en psychologie de l’UABC, cette professionnelle possède une maîtrise en psychothérapie et évaluation de l’enfant et de l’adolescent, un diplôme en psychothérapie cognitivo-comportementale, un autre diplôme en psychothérapie cognitivo-comportementale avancée et un cours de formation en évaluation psychologique de l’enfant.</p>
+                                    <p class="text-muted">Son intervention intègre diverses thérapies à l’efficacité prouvée dans le but de prendre en charge au mieux les problèmes d’anxiété et de dépression, d’impulsivité, de faible estime de soi, de troubles alimentaires et de stress.</p>
+    
+                                    <div class="creators creator-primary d-flex align-items-center">
+                                        <div class="position-relative">
+                                            
+                                        </div>
+        
+                                        <div class="ms-3">
+                                            <h6 class="mb-0"><a routerLink="/creators" class="text-dark name">{{data?.creatorName ? data.creatorName : 'resrveer'}}</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="tab-pane fade" [ngClass]="activeTab === 2 ? 'show active' : '' ">
+                                    <div *ngFor="let item of bids" class="creators creator-primary d-flex align-items-center mt-4">
+                                        <div class="position-relative">
+                                            <img [src]="item.image" class="avatar avatar-md-sm shadow-md rounded-pill" alt="">
+                                        </div>
+        
+                                        <div class="ms-3">
+                                            <h6 class="mb-0">{{item.title1}}<span class="text-muted">by</span> <a routerLink="/creator-profile" class="text-dark name">{{item.title}}</a></h6>
+                                            <small class="text-muted">{{item.time}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="tab-pane fade mt-4" [ngClass]="activeTab === 3 ? 'show active' : '' ">
+                                    <div class="row g-4">
+                                        <div *ngFor="let item of activity" class="col-12">
+                                            <div class="card activity activity-primary rounded-md shadow p-4">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="position-relative">
+                                                        <img [src]="item.image" class="avatar avatar-md-md rounded-md shadow-md" alt="">
+        
+                                                        <div class="position-absolute top-0 start-0 translate-middle px-1 rounded-lg shadow-md bg-white">
+                                                            <i class="mdi mdi-account-check mdi-18px text-success"></i>
+                                                        </div>
+                                                    </div>
+                                                        
+                                                    <span class="content ms-3">
+                                                        <a href="#" (click)="$event.preventDefault()" class="text-dark title mb-0 h6 d-block">{{item.title}}</a>
+                                                        <small class="text-muted d-block mt-1">{{item.title2}} <a href="#" (click)="$event.preventDefault()" class="link fw-bold">{{item.name}}</a></small>
+                                                        
+                                                        <small class="text-muted d-block mt-1">{{item.name}}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end row-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+       <app-live-auction></app-live-auction>
+    </div><!--end container-->
+</section>
+
+<app-footer></app-footer>
+
+<div class="modal fade show" [ngClass]="showModal ? 'd-block ' : 'd-none ' " style="background: #00000096;">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-md rounded-md">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bidtitle">Place a Bid</h5>
+                <button type="button" class="btn btn-close" (click)="bidModal($event)"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="modal-body p-4">
+                <form>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Your Bid Price <span class="text-danger">*</span></label>
+                                <input name="name" id="name" type="text" class="form-control" placeholder="00.00 ETH">
+                                <small class="text-muted"><span class="text-dark">Note:</span> Bid price at least 1 ETH</small>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-12">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Enter Your QTY <span class="text-danger">*</span></label>
+                                <input name="email" id="email" type="email" class="form-control" placeholder="0">
+                                <small class="text-muted"><span class="text-dark">Note:</span> Max. Qty 5</small>
+                            </div> 
+                        </div><!--end col-->
+                    </div>
+                </form>
+
+                <div class="pt-3 border-top">
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold small"> You must bid at least:</p>
+                        <p class="text-primary"> 1.22 ETH </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold small"> Service free:</p>
+                        <p class="text-primary"> 0.05 ETH </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold small"> Total bid amount:</p>
+                        <p class="text-primary mb-0"> 1.27 ETH </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-pills btn-primary" (click)="bidModal($event)"><i class="mdi mdi-gavel fs-5 me-2"></i> Place a Bid</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade show" [ngClass]="showModal2 ? 'd-block ' : 'd-none ' " style="background: #00000096;">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-md rounded-md">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buyNft">Checkout</h5>
+                <button type="button" class="btn btn-close" (click)="bidModal2($event)"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="modal-body p-4">
+                <form>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Your Price <span class="text-danger">*</span></label>
+                                <input name="name" id="name" type="text" class="form-control" value="1.5ETH">
+                            </div>
+                        </div><!--end col-->
+                    </div>
+                </form>
+
+                <div class="py-3 border-top">
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold small"> You must bid at least:</p>
+                        <p class="text-primary"> 1.22 ETH </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold small"> Service free:</p>
+                        <p class="text-primary"> 0.05 ETH </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold small"> Total bid amount:</p>
+                        <p class="text-primary mb-0"> 1.27 ETH </p>
+                    </div>
+                </div>
+
+                <div class="bg-soft-danger p-3 rounded shadow">
+                    <div class="d-flex align-items-center">
+                        <i class="uil uil-exclamation-circle h2 mb-0 me-2"></i>
+                        <div class="flex-1">
+                            <h6 class="mb-0">This creator is not verified</h6>
+                            <small class="mb-0">Purchase this item at your own risk</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button class="btn btn-pills btn-primary w-100" (click)="bidModal2($event)"><i class="mdi mdi-cart fs-5 me-2"></i> Continue</button>
+                    <form>
+                        <div class="form-check align-items-center d-flex mt-2">
+                            <input class="form-check-input mt-0" type="checkbox" value="" id="AcceptT&amp;C">
+                            <label class="form-check-label text-muted ms-2" for="AcceptT&amp;C">I Accept <a href="javascript:void(0)" class="text-primary">Terms And Condition</a></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

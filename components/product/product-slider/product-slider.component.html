@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-12">
+        <div class="tiny-four-item-nav-arrow">
+            <div *ngFor="let item of nftData" class="tiny-slide">
+                <div class="card nft-items nft-primary rounded-md shadow overflow-hidden m-1">
+                    <div class="nft-image position-relative overflow-hidden">
+                        <img [src]="item.image" class="img-fluid" alt="">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="like-icon shadow-sm"><a href="#" (click)="$event.preventDefault()" class="text-muted icon"><i class="mdi mdi-18px mdi-heart mb-0"></i></a></span>
+                        </div>
+                    </div>
+
+                    <div class="card-body content position-relative">
+                        <div class="img-group">
+                            <a routerLink="/creator-profile" class="user-avatar">
+                                <img [src]="item.creator1" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-md rounded-circle">
+                            </a>
+                            <a routerLink="/creator-profile" class="user-avatar ms-n3">
+                                <img [src]="item.creator2" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-md rounded-circle">
+                            </a>
+                            <a routerLink="/creator-profile" class="user-avatar ms-n3">
+                                <img [src]="item.creator3" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-md rounded-circle">
+                            </a>
+                        </div>
+
+                        <div class="mt-2">
+                            <a [routerLink]="['/item-detail-one', item.id]" class="title text-dark h6">{{item.name}}</a>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <small class="rate fw-bold">{{item.amount}}</small>
+                                <small class="text-dark fw-bold">1 out of 10</small>
+                            </div>
+
+                            <div class="text-end mt-3">
+                                <a [routerLink]="['/item-detail-one', item.id]" class="btn btn-sm rounded-md btn-primary">Place a bid</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end row-->
+
+<div class="row justify-content-center mt-4">
+    <div class="col">
+        <div class="text-center">
+            <a href="#" (click)="$event.preventDefault()" class="btn btn-primary rounded-md"><i class="uil uil-process mdi-spin me-1"></i> Load More</a>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->

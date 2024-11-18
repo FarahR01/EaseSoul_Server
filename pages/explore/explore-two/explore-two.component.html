@@ -1,0 +1,52 @@
+<app-navbar [navLight]="true"></app-navbar>
+<section class="bg-half-170 d-table w-100" style="background: url('assets/images/bg/01.jpg') bottom;">
+    <div class="bg-overlay bg-gradient-overlay-2"></div>
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12">
+                <div class="title-heading text-center">
+                    <h5 class="heading fw-semibold sub-heading text-white title-dark">Easesoul</h5>
+                    <p class="text-white-50 para-desc mx-auto mb-0">Développement personnel (confiance en soi, gestion du stress).</p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section><!--end section-->
+<div class="position-relative">            
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="features-absolute">
+                    <div class="row justify-content-center" id="reserve-form">
+                        <div class="col-xl-10 mt-lg-5">
+                            <div class="card bg-white feature-top border-0 shadow rounded p-3">
+                                <app-select-form></app-select-form>
+                            </div>
+                        </div><!--ed col-->
+                    </div><!--end row-->
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <div class="container">
+        <app-product-one [filter]="false" [showAll]="true"></app-product-one>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col">
+                <div class="text-center">
+                    <a href="javascript:void(0)" class="btn btn-primary rounded-md"><i class="uil uil-process mdi-spin me-1"></i> Load More</a>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
+<app-footer></app-footer>

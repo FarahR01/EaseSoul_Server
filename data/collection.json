@@ -1,0 +1,84 @@
+[
+    {
+        "image1":"assets/images/collection/03.jpg",
+        "image2":"assets/images/collection/01.jpg",
+        "image3":"assets/images/collection/04.jpg",
+        "image4":"assets/images/collection/10.jpg",
+        "clientImg":"assets/images/client/01.jpg",
+        "name":"Digital Arts",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/02.jpg",
+        "image2":"assets/images/collection/05.jpg",
+        "image3":"assets/images/collection/06.jpg",
+        "image4":"assets/images/collection/07.jpg",
+        "clientImg":"assets/images/client/10.jpg",
+        "name":"Sports",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/08.jpg",
+        "image2":"assets/images/collection/09.jpg",
+        "image3":"assets/images/collection/11.jpg",
+        "image4":"assets/images/collection/12.jpg",
+        "clientImg":"assets/images/client/12.jpg",
+        "name":"Photography",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/04.jpg",
+        "image2":"assets/images/collection/01.jpg",
+        "image3":"assets/images/collection/10.jpg",
+        "image4":"assets/images/collection/03.jpg",
+        "clientImg":"assets/images/client/02.jpg",
+        "name":"Illustrations",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/05.jpg",
+        "image2":"assets/images/collection/06.jpg",
+        "image3":"assets/images/collection/02.jpg",
+        "image4":"assets/images/collection/07.jpg",
+        "clientImg":"assets/images/client/09.jpg",
+        "name":"Animations",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/11.jpg",
+        "image2":"assets/images/collection/09.jpg",
+        "image3":"assets/images/collection/08.jpg",
+        "image4":"assets/images/collection/12.jpg",
+        "clientImg":"assets/images/client/11.jpg",
+        "name":"Virtual Reality",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/12.jpg",
+        "image2":"assets/images/collection/01.jpg",
+        "image3":"assets/images/collection/04.jpg",
+        "image4":"assets/images/collection/10.jpg",
+        "clientImg":"assets/images/client/03.jpg",
+        "name":"Digital Arts",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/13.jpg",
+        "image2":"assets/images/collection/05.jpg",
+        "image3":"assets/images/collection/06.jpg",
+        "image4":"assets/images/collection/07.jpg",
+        "clientImg":"assets/images/client/04.jpg",
+        "name":"Sports",
+        "item":"27 Items"
+    },
+    {
+        "image1":"assets/images/collection/14.jpg",
+        "image2":"assets/images/collection/09.jpg",
+        "image3":"assets/images/collection/11.jpg",
+        "image4":"assets/images/collection/12.jpg",
+        "clientImg":"assets/images/client/05.jpg",
+        "name":"Photography",
+        "item":"27 Items"
+    }
+   
+]

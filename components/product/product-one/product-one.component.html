@@ -1,0 +1,105 @@
+<div class="row justify-content-center mt-4 mb-5" [ngClass]="filter === false ? 'd-none' : '' ">
+    <div class="col filters-group-wrap">
+        <div class="filters-group">
+            <ul class="container-filter mb-0 categories-filter text-center list-unstyled filter-options">
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === null ? 'active' :'' " (click)="matchCategory(null)" data-group="all"><i class="uil uil-browser"></i> All</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'games' ? 'active' :'' " (click)="matchCategory('games')" data-group="games"><i class="uil uil-volleyball"></i> Games</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'art' ? 'active' :'' " (click)="matchCategory('art')" data-group="art"><i class="uil uil-chart-pie-alt"></i> Art</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'music' ? 'active' :'' " (click)="matchCategory('music')" data-group="music"><i class="uil uil-music"></i> Music</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'video' ? 'active' :'' " (click)="matchCategory('video')" data-group="video"><i class="uil uil-camera-plus"></i> Video</li>
+                <li class="list-inline-item categories position-relative text-dark" [ngClass]="selectedCategory === 'memes' ? 'active' :'' " (click)="matchCategory('memes')" data-group="memes"><i class="uil uil-rocket"></i> Memes</li>
+            </ul>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+<ng-container *ngIf="showAll; else elseTemplate">
+    <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4" id="grid">
+        <div *ngFor="let item of filteredData" class="col picture-item" data-groups='["games"]'>
+            <div class="card nft-items nft-primary rounded-md shadow overflow-hidden mb-1 p-3">
+                <div class="d-flex justify-content-between">
+                    <div class="img-group">
+                        <a routerLink="/creator-profile" class="user-avatar">
+                            <img [src]="item.creator1" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                        </a>
+                        <a routerLink="/creator-profile" class="user-avatar ms-n3">
+                            <img [src]="item.creator2" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                        </a>
+                        <a routerLink="/creator-profile" class="user-avatar ms-n3">
+                            <img [src]="item.creator3" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                        </a>
+                    </div>
+                    
+                    <span class="like-icon shadow-sm"><a href="#" (click)="$event.preventDefault()" class="text-muted icon"><i class="mdi mdi-18px mdi-heart mb-0"></i></a></span>
+                </div>
+    
+                <div class="nft-image rounded-md mt-3 position-relative overflow-hidden">
+                    <a [routerLink]="['/item-detail-one', item.id]"><img [src]="item.image" class="img-fluid" alt=""></a>
+                    <div class="position-absolute top-0 start-0 m-2" *ngIf="item.gif">
+
+                    </div>
+    
+                    <div class="position-absolute top-0 end-0 m-2">
+                    </div>
+    
+                    <div class="position-absolute bottom-0 start-0 m-2 bg-gradient-primary text-white title-dark rounded-pill px-3" *ngIf="item.showtime">
+                        <i class="uil uil-clock"></i> <small id="auction-item-1" class="fw-bold"> </small>
+                    </div>
+                </div>
+    
+                <div class="card-body content position-relative p-0 mt-3">
+                    <a [routerLink]="['/item-detail-one', item.id]" class="title text-dark h6">{{item.name}}</a>
+    
+                    <div class="d-flex justify-content-between mt-2">
+                        <small class="rate fw-bold">{{item.amount}}</small>
+                        <small class="text-dark fw-bold">1 out of 10</small>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4" id="grid">
+        <div *ngFor="let item of filteredData | slice:0:12" class="col picture-item" data-groups='["games"]'>
+            <div class="card nft-items nft-primary rounded-md shadow overflow-hidden mb-1 p-3">
+                <div class="d-flex justify-content-between">
+                    <div class="img-group">
+                        <a routerLink="/creator-profile" class="user-avatar">
+                            <img [src]="item.creator1" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                        </a>
+                        <a routerLink="/creator-profile" class="user-avatar ms-n3">
+                            <img [src]="item.creator2" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                        </a>
+                        <a routerLink="/creator-profile" class="user-avatar ms-n3">
+                            <img [src]="item.creator3" alt="user" class="avatar avatar-sm-sm img-thumbnail border-0 shadow-sm rounded-circle">
+                        </a>
+                    </div>
+                    
+                    <span class="like-icon shadow-sm"><a href="#" (click)="$event.preventDefault()" class="text-muted icon"><i class="mdi mdi-18px mdi-heart mb-0"></i></a></span>
+                </div>
+    
+                <div class="nft-image rounded-md mt-3 position-relative overflow-hidden">
+                    <a [routerLink]="['/item-detail-one', item.id]"><img [src]="item.image" class="img-fluid" alt=""></a>
+                    <div class="position-absolute top-0 start-0 m-2" *ngIf="item.gif">
+                    </div>
+    
+                    <div class="position-absolute top-0 end-0 m-2">
+                    </div>
+    
+                    <div class="position-absolute bottom-0 start-0 m-2 bg-gradient-primary text-white title-dark rounded-pill px-3" *ngIf="item.showtime">
+                        <i class="uil uil-clock"></i> <small id="auction-item-1" class="fw-bold"> </small>
+                    </div>
+                </div>
+    
+                <div class="card-body content position-relative p-0 mt-3">
+                    <a [routerLink]="['/item-detail-one', item.id]" class="title text-dark h6">{{item.name}}</a>
+    
+                    <div class="d-flex justify-content-between mt-2">
+                        <small class="rate fw-bold">{{item.amount}}</small>
+                        <small class="text-dark fw-bold">1 out of 10</small>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+    </div>
+</ng-template>

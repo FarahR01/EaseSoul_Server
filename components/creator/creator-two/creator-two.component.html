@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-12">
+        <div class="section-title">
+            <h4 class="title mb-2">Best Creators & Sellers</h4>
+            <p class="text-muted mb-0">Best sellers of the week's NFTs</p>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div *ngFor="let item of creatorData" class="col-lg-3 col-md-4 mt-5">
+        <div class="creators creator-primary d-flex align-items-center">
+            <span class="fw-bold text-muted">{{item.number}}.</span>
+
+            <div class="d-flex align-items-center ms-3">
+                <div class="position-relative d-inline-flex">
+                    <img [src]="item.image" class="avatar avatar-md-sm shadow-md rounded-pill" alt="">
+                    <span class="verified text-primary" *ngIf="item.check">
+                        <i class="mdi mdi-check-decagram"></i>
+                    </span>
+                    <span class="online text-success" *ngIf="item.check">
+                        <i class="mdi mdi-circle"></i>
+                    </span>
+                </div>
+
+                <div class="ms-3">
+                    <h6 class="mb-0"><a routerLink="/creators" class="text-dark name">{{item.name}}</a></h6>
+                    <small class="text-muted">20.5 ETH</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end row-->

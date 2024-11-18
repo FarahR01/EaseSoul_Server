@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="section-title text-center mb-5 pb-3">
+            <h4 class="title mb-4">Popular Creators</h4>
+            <p class="text-muted para-desc mb-0 mx-auto">We are a huge marketplace dedicated to connecting great artists of all Superex with their fans and unique token collectors!</p>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row g-4">
+    <div *ngFor="let item of creatorData" class="col-lg-3 col-md-4">
+        <div class="creators creator-primary creators-two bg-white d-flex align-items-center p-3 rounded-md shadow">
+            <div class="d-flex align-items-center">
+                <div class="position-relative d-inline-flex">
+                    <img [src]="item.image" class="avatar avatar-md-sm shadow-md rounded-pill" alt="">
+                    <span class="verified text-primary" *ngIf="item.check">
+                        <i class="mdi mdi-check-decagram"></i>
+                    </span>
+                    <span class="online text-success" *ngIf="item.check">
+                        <i class="mdi mdi-circle"></i>
+                    </span>
+                </div>
+
+                <div class="ms-3">
+                    <h6 class="mb-0"><a routerLink="/creators" class="text-dark name">{{item.name}}</a></h6>
+                    <small class="text-muted">20.5 ETH</small>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
