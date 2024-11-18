@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
+
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -80,11 +81,16 @@ public class AuthController {
             // Set authentication to security context
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            // Get user details
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+            // Check if the user is disabled
+            if (!userDetails.isEnabled()) {
+                return ResponseEntity.badRequest().body("Your account is disabled. Please contact support.");
+            }
+
             // Generate JWT token
             String jwt = jwtTokenProvider.generateToken(authentication);
-
-            // Get user details from authentication
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
             // Return token and user details in response
             return ResponseEntity.ok(new JwtResponseDto(
@@ -96,9 +102,11 @@ public class AuthController {
                             .collect(Collectors.toList())
             ));
         } catch (Exception e) {
+            // Log error and return a more general message
             return ResponseEntity.badRequest().body("Invalid email or password: " + e.getMessage());
         }
     }
+
     @GetMapping("/activate")
     public ResponseEntity<?> activateAccount(@RequestParam("token") String token) {
         try {

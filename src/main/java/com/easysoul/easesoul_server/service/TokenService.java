@@ -54,4 +54,9 @@ public class TokenService {
         Token token = new Token(tokenValue, user, expiryDate);
         return tokenRepository.save(token);
     }
+    @Transactional
+    public void deleteTokensByUserId(Long userId) {
+        tokenRepository.deleteByUserId(userId);
+    }
+
 }

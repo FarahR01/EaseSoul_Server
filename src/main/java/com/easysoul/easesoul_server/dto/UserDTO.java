@@ -1,28 +1,18 @@
-package com.easysoul.easesoul_server.model;
+package com.easysoul.easesoul_server.dto;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
     private Long id;
-
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+    private String role;
     private LocalDate dateOfBirth;
     private String gender;
     private String address;
     private String phoneNumber;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
-    private Role role;
 
     // Fields specific to psychologists
     private String licenseNumber;
@@ -30,6 +20,7 @@ public class User {
     private boolean isActive;
     private LocalDateTime createdAt;
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -62,12 +53,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public LocalDate getDateOfBirth() {
@@ -102,19 +93,24 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    // Return ERole from Role
-    public ERole getRole() {
-        return role != null ? role.getName() : null; // Return the ERole enum
+    public String getLicenseNumber() {
+        return licenseNumber;
     }
 
-    // Set Role object (not ERole enum directly)
-    public void setRole(Role role) {
-        this.role = role;
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 
-    // Getter and setter for isActive
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
     public boolean isActive() {
-        return isActive;  // Return the actual value
+        return isActive;
     }
 
     public void setActive(boolean active) {
@@ -127,13 +123,5 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
     }
 }

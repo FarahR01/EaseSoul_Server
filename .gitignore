@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## Secured Files (Contains Credentials)
+!**/src/main/java/com/easysoul/easesoul_server/utils/**

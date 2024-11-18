@@ -36,7 +36,7 @@ public class UserDetailsImpl implements UserDetails {
         // Create a single authority from the user's role
         // Convert ERole enum to string and prefix with "ROLE_" if needed
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(
-                "ROLE_" + user.getRole().getName().name()
+                "ROLE_" + user.getRole().name()
         );
 
         return new UserDetailsImpl(
@@ -98,7 +98,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return true;
     }
 
     @Override
