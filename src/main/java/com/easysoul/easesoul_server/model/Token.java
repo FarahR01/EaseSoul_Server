@@ -1,6 +1,7 @@
 package com.easysoul.easesoul_server.model;
 
 import jakarta.persistence.*;
+
 import java.time.Instant;
 
 @Entity
@@ -58,4 +59,9 @@ public class Token {
     public void setExpiryDate(Instant expiryDate) {
         this.expiryDate = expiryDate;
     }
+    public boolean isExpired() {
+        return expiryDate.isBefore(Instant.now());
+    }
+
+
 }

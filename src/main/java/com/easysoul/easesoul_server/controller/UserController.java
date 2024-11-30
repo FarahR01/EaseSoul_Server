@@ -1,6 +1,7 @@
 package com.easysoul.easesoul_server.controller;
 
 import com.easysoul.easesoul_server.dto.UserDTO;
+import com.easysoul.easesoul_server.model.ERole;
 import com.easysoul.easesoul_server.payload.response.ApiResponse;
 import com.easysoul.easesoul_server.service.UserService;
 import org.slf4j.Logger;
@@ -133,12 +134,14 @@ public class UserController {
                     ));
         }
     }
-    // Get current user's role
     @GetMapping("/role")
-    public ResponseEntity<String> getCurrentUserRole(Principal principal) {
-        String role = String.valueOf(userService.getRoleByEmail(principal.getName()));
-        return ResponseEntity.ok(role);
+    public ERole getUserRole(@RequestParam("email") String email) {
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty.");
+        }
+        return userService.getRoleByUserIdOrEmail(email);
     }
+
 
     // Get all psychologists (users with the "PSYCHOLOGIST" role)
     @GetMapping("/psychologists")

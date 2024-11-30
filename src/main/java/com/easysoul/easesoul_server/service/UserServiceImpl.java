@@ -173,5 +173,11 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+    @Override
+    public ERole getRoleByUserIdOrEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
 
+        return user.getRole().getName();  // Assuming User has a getRole() method returning the Role object
+    }
 }

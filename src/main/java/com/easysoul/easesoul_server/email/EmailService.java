@@ -57,6 +57,7 @@ public class EmailService {
 
         mailSender.send(mimeMessage);
     }
+
     @Async
     public void sendActivationEmail(String to, String token) {
         String subject = "Account Activation";
@@ -69,12 +70,30 @@ public class EmailService {
 
         mailSender.send(mailMessage);
     }
+
     //Send the Reset Email
-    public void sendPasswordResetEmail(String email, String resetLink) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Password Reset Request");
-        message.setText("Click the following link to reset your password: " + resetLink);
-        mailSender.send(message);
+    public void sendPasswordResetEmail(String email, String username, String resetLink) {
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+            // Populate template data
+            Context context = new Context();
+            context.setVariable("username", username);
+            context.setVariable("resetLink", resetLink);
+            context.setVariable("year", java.time.Year.now().getValue());
+
+            // Generate HTML content
+            String htmlContent = templateEngine.process("password-reset", context);
+
+            helper.setTo(email);
+            helper.setSubject("EaseSoul - Password Reset Request");
+            helper.setText(htmlContent, true);
+
+            mailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            log.error("Error sending password reset email to {}: {}", email, e.getMessage());
+            throw new RuntimeException("Failed to send email");
+        }
     }
 }

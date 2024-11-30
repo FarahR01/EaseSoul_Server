@@ -136,4 +136,16 @@ public class User {
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
+    public String getUsername() {
+        if (firstName != null && lastName != null) {
+            return firstName + " " + lastName; // Combine first and last name
+        } else if (firstName != null) {
+            return firstName; // Fallback to firstName if lastName is null
+        } else if (lastName != null) {
+            return lastName; // Fallback to lastName if firstName is null
+        } else {
+            return "User"; // Default fallback if both are null
+        }
+    }
+
 }

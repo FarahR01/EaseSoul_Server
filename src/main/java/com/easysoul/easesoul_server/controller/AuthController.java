@@ -8,7 +8,10 @@ import com.easysoul.easesoul_server.security.UserDetailsImpl;
 import com.easysoul.easesoul_server.service.AuthService;
 import com.easysoul.easesoul_server.service.JwtTokenProvider;
 import com.easysoul.easesoul_server.service.TokenService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,13 +19,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
 
 @RequestMapping("/auth")
 public class AuthController {
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     @Autowired
     private AuthService authService;
@@ -130,15 +137,50 @@ public class AuthController {
         }
     }
     @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequestDto forgotPasswordRequest) {
+    public ResponseEntity<Map<String, String>> forgotPassword(@RequestBody ForgotPasswordRequestDto forgotPasswordRequest) {
         authService.requestPasswordReset(forgotPasswordRequest.getEmail());
-        return ResponseEntity.ok("Password reset link sent to your email.");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Password reset link sent to your email.");
+        return ResponseEntity.ok(response);
     }
 
+
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequestDto resetPasswordRequest) {
-        authService.resetPassword(resetPasswordRequest.getToken(), resetPasswordRequest.getNewPassword());
-        return ResponseEntity.ok("Password reset successfully.");
+    public ResponseEntity<String> resetPassword(
+            @RequestBody ResetPasswordRequestDto resetPasswordRequest
+    ) {
+        // Detailed logging
+        logger.info("Reset password endpoint called");
+        logger.info("Request body: {}", resetPasswordRequest);
+
+        // Validate input
+        if (resetPasswordRequest == null) {
+            logger.error("Received null reset password request");
+            return ResponseEntity.badRequest().body("Invalid reset request");
+        }
+
+        // Additional null checks
+        if (StringUtils.isEmpty(resetPasswordRequest.getToken())) {
+            logger.error("Token is missing");
+            return ResponseEntity.badRequest().body("Token is required");
+        }
+
+        if (StringUtils.isEmpty(resetPasswordRequest.getNewPassword())) {
+            logger.error("New password is missing");
+            return ResponseEntity.badRequest().body("New password is required");
+        }
+
+        try {
+            authService.resetPassword(
+                    resetPasswordRequest.getToken(),
+                    resetPasswordRequest.getNewPassword()
+            );
+            return ResponseEntity.ok("Password reset successfully.");
+        } catch (Exception e) {
+            logger.error("Password reset error", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to reset password: " + e.getMessage());
+        }
     }
     //Logout Endpoint
     @PostMapping("/logout")
@@ -153,4 +195,10 @@ public class AuthController {
             return ResponseEntity.status(500).body(result);
         }
     }
+    @PostMapping("/resend-activation-link")
+    public ResponseEntity<String> resendActivationLink(@RequestBody ResendActivationRequestDto resendActivationRequest) {
+        authService.resendActivationEmail(resendActivationRequest.getEmail());
+        return ResponseEntity.ok("Activation link sent to your email.");
+    }
+
 }

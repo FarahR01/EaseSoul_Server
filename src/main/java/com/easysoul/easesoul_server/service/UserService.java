@@ -22,4 +22,8 @@ public interface UserService {
     List<UserDTO> getUsersByRole(String role);
     boolean existsById(Long id);
     String getUserEmailById(Long id);
+
+    // New method for retrieving user role by ID or email
+    ERole getRoleByUserIdOrEmail(String email);
 }
+

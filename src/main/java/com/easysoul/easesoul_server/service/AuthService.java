@@ -5,11 +5,13 @@ package com.easysoul.easesoul_server.service;
 import com.easysoul.easesoul_server.dto.RegisterRequestDto;
 import com.easysoul.easesoul_server.email.EmailService;
 import com.easysoul.easesoul_server.exceptions.EmailAlreadyExistsException;
+import com.easysoul.easesoul_server.exceptions.InvalidTokenException;
 import com.easysoul.easesoul_server.model.ERole;
 import com.easysoul.easesoul_server.model.Role;
 import com.easysoul.easesoul_server.model.Token;
 import com.easysoul.easesoul_server.model.User;
 import com.easysoul.easesoul_server.repository.RoleRepository;
+import com.easysoul.easesoul_server.repository.TokenRepository;
 import com.easysoul.easesoul_server.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -20,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -43,6 +46,8 @@ public class AuthService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private TokenRepository tokenRepository;
 
     // Register new user
     public User register(RegisterRequestDto registerRequest) throws Exception {
@@ -93,26 +98,47 @@ public class AuthService {
 
         Token token = tokenService.createPasswordResetToken(user);
 
-        // Send email with the reset token (assuming emailService has been configured)
-        String resetLink = "http://localhost:8080/auth/reset-password?token=" + token.getToken();
-        emailService.sendPasswordResetEmail(user.getEmail(), resetLink);
+        // Use the frontend URL for the reset link
+        String frontendUrl = System.getenv("FRONTEND_URL"); // Ensure this is set in your environment variables
+        if (frontendUrl == null) {
+            frontendUrl = "http://localhost:4200"; // Default to localhost if not set
+        }
+        String resetLink = frontendUrl + "/auth/forgot-pass?token=" + token.getToken();
+
+        // Include the username when calling the email service
+        emailService.sendPasswordResetEmail(user.getEmail(), user.getUsername(), resetLink);
+    }
+    private boolean isValidPassword(String password) {
+        // Example criteria: at least 8 characters, one uppercase, one number, one special character
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";
+        return password.matches(passwordPattern);
     }
 
+    @Transactional
     public void resetPassword(String token, String newPassword) {
-        tokenService.validateToken(token);
+        // Find and validate the token
+        Token resetToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new InvalidTokenException("Invalid or expired reset token"));
 
-        Token resetToken = tokenService.findByToken(token)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid reset token"));
+        // Check if token is expired
+        if (resetToken.isExpired()) {
+            throw new InvalidTokenException("Token has expired");
+        }
 
+
+        // Get the user associated with the token
         User user = resetToken.getUser();
-        user.setPassword(passwordEncoder.encode(newPassword));
+
+        // Encode the new password
+        String encodedPassword = passwordEncoder.encode(newPassword);
+
+        // Update the password
+        user.setPassword(encodedPassword);
         userRepository.save(user);
 
-        // Delete the token after successful password reset
-        tokenService.deleteToken(token);
+        // Invalidate the token after use
+        tokenRepository.delete(resetToken);
     }
-
-    // Logout the user by clearing the security context (session invalidation can be added as needed)
     public String logout() {
         try {
             // Log the logout attempt
@@ -132,4 +158,20 @@ public class AuthService {
             return "An error occurred while logging out.";
         }
     }
+    //Resend Activation Email Logic
+    public void resendActivationEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        if (user.isActive()) {
+            throw new IllegalStateException("User already activated");
+        }
+
+        Token token = tokenService.createToken(user);
+
+        // Send email with the reset token (assuming emailService has been configured)
+        String activationLink = "http://localhost:4200/auth/activate?token=" + token.getToken();
+        emailService.sendActivationEmail(user.getEmail(), activationLink);
+    }
+
 }
